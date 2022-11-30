@@ -10,13 +10,19 @@ public class DBConn {
 
     public void openDB() throws SQLException {
         /*
-         *Crea un oggetto per connettersi al DB tramite una stringa URL indicando in essa rispettivamente:
-         * 1. il tipo di db a cui mi voglio collegare
-         * 2. indirizzo e porta su cui gira il server DB
-         * 3. il nome del DB su cui collegarsi
-         * 4. credenziali di accesso al DB: user, passwd
+         * Crea un oggetto per connettersi al DB tramite una stringa URL indicando in essa rispettivamente:
+         * 1. il tipo di db a cui mi voglio collegare ----> jdbc:derby;
+         * 2. indirizzo e porta su cui gira il server DB in caso il DB risieda in remoto;
+         * 3. il nome del DB su cui collegarsi ----> bookshelf;
+         * 4. credenziali di accesso al DB: user, passwd se necessarie;
+         * 5. 'create=true' per creare il DB
          */
-        this.con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookshelf", "root", "parabellum3");
+        try {
+            this.con = DriverManager.getConnection("jdbc:derby:bookshelf; create=true");
+            System.out.println("Good to go");
+        } catch (Exception E) {
+            System.out.println("JDBC Driver error");
+        }
     }
 
     public void closeDB() throws SQLException {
@@ -25,17 +31,33 @@ public class DBConn {
     }
 
     public void createBook(String ISBN, String title) throws SQLException {
-        PreparedStatement pst = this.con.prepareStatement("insert into book(ISBN, title) values (?,?)");
-        pst.setString(1, ISBN);
-        pst.setString(2, title);
-        pst.executeUpdate();
+        /*
+         * L'istruzione a seguire serve a creare una tabella:
+         *
+         * PreparedStatement pst = this.con.prepareStatement("create table book(ISBN int, title varchar(45))");
+         */
+        try {
+            /*
+             * Inserisce un libro tramite un preparedStatement che prende in ingresso una stringa SQL
+             * i cui parametri sono:
+             * 1. ISBN
+             * 2. Titolo
+             *
+             * nella sezione 'values' i punti interrogativi servono per prendere dei parametri in ingresso da altre
+             * variabili. Infatti la variabile pst setta il primo '?' come 'ISBN' e il secondo '?' come 'Titolo'
+             * Infine si esegue l'update della variabile che memorizza i parametri nel DB
+             *
+             */
+            PreparedStatement pst = this.con.prepareStatement("Insert into book (ISBN, title) values (?,?)");
+            pst.setString(1, ISBN);
+            pst.setString(2, title);
+            pst.executeUpdate();
+            System.out.println("Book added");
+        } catch (Exception E) {
+            System.out.println(E);
+        }
+
     }
 
-    public static void main(String[] args) {
-        try {
-            System.out.println("Good to go");
-        } catch (Exception E) {
-            System.out.println("JDBC Driver error");
-        }
-    }
+
 }

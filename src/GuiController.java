@@ -28,9 +28,13 @@ public class GuiController {
     @FXML
     private TextField year;
     Book b;
-
-    public void initialize() {
+    DBConn db;
+    public void initialize() throws SQLException {
         // TODO
+        //Crea ed apre la connessione al DB
+        this.db = new DBConn();
+        this.db.openDB();
+        //----------------
         year.setText(String.valueOf(ZonedDateTime.now().getYear()));
         insDate.setText(ZonedDateTime.now().getDayOfMonth() + "/"
                 + ZonedDateTime.now().getMonthValue() + "/"
@@ -39,10 +43,13 @@ public class GuiController {
                 + ZonedDateTime.now().getMinute());
     }
 
+    /*
+     * Questo metodo prende in ingresso i parametri passati dall'interfaccia, contente i dati di un libro
+     * e poi chiama il metodo 'createBook' che consente la memorizzazione nel DB dei dati inseriti
+     */
     @FXML
     private void insertButton() throws SQLException {
-        DBConn db = new DBConn();
-        db.openDB();
+        //crea un nuovo libro con i parametri passati
         b = new Book(ISBN.getText(),
                 titolo.getText(),
                 author.getText(),
@@ -53,10 +60,13 @@ public class GuiController {
                 Double.parseDouble(price.getText()));
         System.out.println(b.getBookYear());
         insDate.setText(b.getInsertDate());
+        //chiama il metodo per inserire il libro nel DB
+        this.db.createBook(b.getISBN(), b.getTitle());
+        this.db.closeDB();
+    }
 
-        db.createBook(b.getISBN(), b.getTitle());
-        db.closeDB();
-
+    @FXML
+    private void addAuthor(){
 
     }
 }

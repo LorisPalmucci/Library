@@ -36,11 +36,11 @@ public class Book implements Comparable {
 
         this.ISBN = ISBN;
         this.title = title;
-        this.author = new String[1];
+        this.author = new String[10];
         this.author[0] = author;
         this.type = type;
         this.date = date;
-        this.insertDate = ZonedDateTime.now();
+        //this.insertDate = ZonedDateTime.now();
         this.price = price;
     }
 
@@ -138,7 +138,7 @@ public class Book implements Comparable {
      * @return
      */
     public String getInsertDate(){
-
+        this.insertDate = ZonedDateTime.now();
         return insertDate.getDayOfMonth() + "/"
                 + insertDate.getMonthValue() + "/"
                     +insertDate.getYear() + " - "

@@ -20,10 +20,7 @@ public class Gui extends Application{
     }
 
     public static void main(String[] args) {
-
         //launch a standalone application
         Application.launch(args);
-
-
     }
 }
