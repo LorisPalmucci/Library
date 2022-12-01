@@ -4,8 +4,10 @@ public class DBConn {
 
     Connection con;
 
+    PreparedStatement pst;
     public DBConn() throws SQLException {
         this.con = null;
+        PreparedStatement pst;
     }
 
     public void openDB() throws SQLException {
@@ -48,16 +50,28 @@ public class DBConn {
              * Infine si esegue l'update della variabile che memorizza i parametri nel DB
              *
              */
-            PreparedStatement pst = this.con.prepareStatement("Insert into book (ISBN, title) values (?,?)");
-            pst.setString(1, ISBN);
-            pst.setString(2, title);
-            pst.executeUpdate();
+            this.pst = this.con.prepareStatement("Insert into book (ISBN, title) values (?,?)");
+            this.pst.setString(1, ISBN);
+            this.pst.setString(2, title);
+            this.pst.executeUpdate();
             System.out.println("Book added");
         } catch (Exception E) {
             System.out.println(E);
         }
-
     }
 
+    public void returnBook(){
+        try {
+            this.pst = this.con.prepareStatement("SELECT ISBN,title FROM book");
+            ResultSet res = pst.executeQuery();
+            while (res.next()){
 
+                System.out.println(res.getInt(1 ));
+                System.out.println(res.getString(2) +"\n");
+            }
+            System.out.println("OK");
+        }catch (Exception E){
+            System.out.println(E);
+        }
+    }
 }
