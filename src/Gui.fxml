@@ -57,7 +57,11 @@
                   <Label layoutX="49.0" layoutY="318.0" text="/" />
                   <Label layoutX="92.0" layoutY="318.0" text="/" />
                   <Button layoutX="52.0" layoutY="483.0" mnemonicParsing="false" onMouseClicked="#insertButton" text="Inserisci" />
+<<<<<<< HEAD
                   <Button fx:id="addAuthor" layoutY="195.0" mnemonicParsing="false" onMouseClicked="#addAuthor" prefHeight="31.0" prefWidth="32.0" text="+" textAlignment="CENTER" />
+=======
+                  <Button fx:id="bookList" layoutY="195.0" mnemonicParsing="false" onMouseClicked="#addAuthor" prefHeight="31.0" prefWidth="32.0" text="+" textAlignment="CENTER" />
+>>>>>>> master
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="181.0" prefWidth="121.0" />

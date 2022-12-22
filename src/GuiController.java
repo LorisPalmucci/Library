@@ -1,7 +1,10 @@
 import Bookshelf.Book;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+<<<<<<< HEAD
 import javafx.scene.control.ListView;
+=======
+>>>>>>> master
 import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
@@ -29,10 +32,16 @@ public class GuiController {
     private TextField insDate;
     @FXML
     private TextField year;
+<<<<<<< HEAD
     @FXML
     private Button addAuthor;
     @FXML
     private ListView bookList;
+=======
+
+    @FXML
+    private Button bookList;
+>>>>>>> master
     Book b;
     DBConn db;
     public void initialize() throws SQLException {
@@ -74,6 +83,7 @@ public class GuiController {
     @FXML
     private void addAuthor() throws SQLException {
        this.db.returnBook();
+<<<<<<< HEAD
     }
 
     @FXML
@@ -83,5 +93,7 @@ public class GuiController {
                 arr) {
             this.bookList.getItems().add(val);
         }
+=======
+>>>>>>> master
     }
 }
