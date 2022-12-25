@@ -1,15 +1,11 @@
 import Bookshelf.Book;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-<<<<<<< HEAD
 import javafx.scene.control.ListView;
-=======
->>>>>>> master
 import javafx.scene.control.TextField;
-
 import java.sql.SQLException;
 import java.time.ZonedDateTime;
-import java.time.chrono.ChronoZonedDateTime;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class GuiController {
@@ -32,16 +28,14 @@ public class GuiController {
     private TextField insDate;
     @FXML
     private TextField year;
-<<<<<<< HEAD
     @FXML
     private Button addAuthor;
     @FXML
     private ListView bookList;
-=======
 
     @FXML
-    private Button bookList;
->>>>>>> master
+    private Button bbookList;
+
     Book b;
     DBConn db;
     public void initialize() throws SQLException {
@@ -77,23 +71,20 @@ public class GuiController {
         insDate.setText(b.getInsertDate());
         //chiama il metodo per inserire il libro nel DB
         this.db.createBook(b.getISBN(), b.getTitle());
-        this.db.closeDB();
+        //this.db.closeDB();
     }
 
     @FXML
     private void addAuthor() throws SQLException {
        this.db.returnBook();
-<<<<<<< HEAD
     }
 
     @FXML
     private void listBook(){
-        int arr[] = new int[]{1,2,3,4,5};
-        for (int val :
-                arr) {
-            this.bookList.getItems().add(val);
+        ArrayList<String> stringa = db.returnBook();
+        for (String str :
+                stringa) {
+            this.bookList.getItems().add(str);
         }
-=======
->>>>>>> master
     }
 }
