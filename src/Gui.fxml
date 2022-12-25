@@ -69,7 +69,9 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="537.0" prefWidth="309.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="TOP" layoutX="67.0" layoutY="10.0" prefHeight="23.0" prefWidth="168.0" style="-fx-border-color: Black;" text="Dettagli Libro" textAlignment="CENTER" wrapText="true" />
+                        <Label alignment="CENTER" contentDisplay="TOP" layoutX="67.0" layoutY="10.0" prefHeight="23.0"
+                               prefWidth="168.0" style="-fx-border-color: Black;" text="Dettagli Libro"
+                               textAlignment="CENTER" wrapText="true" />
                      </children>
                   </AnchorPane>
               </content>
