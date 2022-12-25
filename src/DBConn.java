@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBConn {
 
@@ -60,18 +61,18 @@ public class DBConn {
         }
     }
 
-    public void returnBook(){
+    public ArrayList<String> returnBook(){
+        ArrayList<String> s = new ArrayList<>();
         try {
             this.pst = this.con.prepareStatement("SELECT ISBN,title FROM book");
             ResultSet res = pst.executeQuery();
             while (res.next()){
-
-                System.out.println(res.getInt(1 ));
-                System.out.println(res.getString(2) +"\n");
+                s.add(res.getString(2));
             }
             System.out.println("OK");
         }catch (Exception E){
             System.out.println(E);
         }
+        return s;
     }
 }
