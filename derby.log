@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Sun Dec 25 02:23:44 CET 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0185-46e0-ed8f-00001b09e240 
-on database directory C:\Users\User\Desktop\programmazione\java\Library\bookshelf with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
-Loaded from file:/C:/Users/User/Desktop/programmazione/java/Library/lib/derby.jar
+Fri Dec 30 01:08:00 CET 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0185-605b-62fb-00000c5dc820 
+on database directory E:\Programmazione\Library\bookshelf with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/E:/Programmazione/Library/lib/derby.jar
 java.vendor=Amazon.com Inc.
-java.runtime.version=1.8.0_342-b07
-user.dir=C:\Users\User\Desktop\programmazione\java\Library
+java.runtime.version=1.8.0_352-b08
+user.dir=E:\Programmazione\Library
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

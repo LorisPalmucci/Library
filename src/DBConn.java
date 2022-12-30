@@ -1,3 +1,5 @@
+import Bookshelf.Book;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -6,12 +8,12 @@ public class DBConn {
     Connection con;
 
     PreparedStatement pst;
-    public DBConn() throws SQLException {
+    public DBConn() {
         this.con = null;
         PreparedStatement pst;
     }
 
-    public void openDB() throws SQLException {
+    public void openDB() {
         /*
          * Crea un oggetto per connettersi al DB tramite una stringa URL indicando in essa rispettivamente:
          * 1. il tipo di db a cui mi voglio collegare ----> jdbc:derby;
@@ -33,7 +35,7 @@ public class DBConn {
         this.con.close();
     }
 
-    public void createBook(String ISBN, String title) throws SQLException {
+    public void createBook(String ISBN, String title) {
         /*
          * L'istruzione a seguire serve a creare una tabella:
          *
@@ -61,7 +63,7 @@ public class DBConn {
         }
     }
 
-    public ArrayList<String> returnBook(){
+    public ArrayList<String> returnBook() {
         ArrayList<String> s = new ArrayList<>();
         try {
             this.pst = this.con.prepareStatement("SELECT ISBN,title FROM book");
@@ -69,10 +71,22 @@ public class DBConn {
             while (res.next()){
                 s.add(res.getString(2));
             }
-            System.out.println("OK");
+            System.out.println("Returned List");
         }catch (Exception E){
             System.out.println(E);
         }
         return s;
+    }
+
+    public void removeSingleBook(Object book) {
+        try {
+            this.pst = this.con.prepareStatement("DELETE FROM book WHERE title = ?");
+            this.pst.setString(1, (String) book);
+            this.pst.executeUpdate();
+
+            System.out.println("Book Deleted");
+        }catch (Exception E){
+            System.out.println(E);
+        }
     }
 }

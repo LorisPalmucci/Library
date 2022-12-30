@@ -3,7 +3,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import java.sql.SQLException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -29,16 +28,9 @@ public class GuiController {
     @FXML
     private TextField year;
     @FXML
-    private Button addAuthor;
-    @FXML
-    private ListView bookList;
-
-    @FXML
-    private Button bbookList;
-
-    Book b;
+    private ListView list;
     DBConn db;
-    public void initialize() throws SQLException {
+    public void initialize() {
         // TODO
         //Crea ed apre la connessione al DB
         this.db = new DBConn();
@@ -50,6 +42,7 @@ public class GuiController {
                 + ZonedDateTime.now().getYear() + " - "
                 + ZonedDateTime.now().getHour() + ":"
                 + ZonedDateTime.now().getMinute());
+        this.listBookButton();
     }
 
     /*
@@ -57,9 +50,9 @@ public class GuiController {
      * e poi chiama il metodo 'createBook' che consente la memorizzazione nel DB dei dati inseriti
      */
     @FXML
-    private void insertButton() throws SQLException {
+    private void insertButton() {
         //crea un nuovo libro con i parametri passati
-        b = new Book(ISBN.getText(),
+        Book b = new Book(ISBN.getText(),
                 titolo.getText(),
                 author.getText(),
                 type.getText(),
@@ -71,20 +64,24 @@ public class GuiController {
         insDate.setText(b.getInsertDate());
         //chiama il metodo per inserire il libro nel DB
         this.db.createBook(b.getISBN(), b.getTitle());
+        this.listBookButton();
         //this.db.closeDB();
     }
 
     @FXML
-    private void addAuthor() throws SQLException {
-       this.db.returnBook();
-    }
-
-    @FXML
-    private void listBook(){
+    private void listBookButton() {
+        this.list.getItems().clear();
         ArrayList<String> stringa = db.returnBook();
         for (String str :
                 stringa) {
-            this.bookList.getItems().add(str);
+            this.list.getItems().add(str);
         }
+    }
+
+    @FXML
+    private void deleteBook() {
+        Object m = list.getSelectionModel().getSelectedItem();
+        this.db.removeSingleBook(m);
+        this.listBookButton();
     }
 }
