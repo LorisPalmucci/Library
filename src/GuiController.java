@@ -1,11 +1,18 @@
 import Bookshelf.Book;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Stack;
 
 public class GuiController {
 
@@ -69,7 +76,7 @@ public class GuiController {
     }
 
     @FXML
-    private void listBookButton() {
+    private void listBookButton(){
         this.list.getItems().clear();
         ArrayList<String> stringa = db.returnBook();
         for (String str :
@@ -83,5 +90,14 @@ public class GuiController {
         Object m = list.getSelectionModel().getSelectedItem();
         this.db.removeSingleBook(m);
         this.listBookButton();
+    }
+
+    @FXML
+    private void addBookshelf() throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("newBookShelf.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
