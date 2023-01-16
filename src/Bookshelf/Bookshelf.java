@@ -126,10 +126,23 @@ public class Bookshelf {
         return numOfShelf;
     }
 
-    public void addShelf(){
-        Shelf s = new Shelf(this.width);
-        s.setShelfID();
+    private class Shelf{
+        private double width;
+        private ArrayList arrayOfBook;
+        private int shelfID;
 
+        public Shelf(double width){
+            this.width = width;
+            this.shelfID = 0;
+        }
+
+        public void setShelfID(){
+            this.shelfID++;
+        }
+
+        public void addBook(Book book){
+            arrayOfBook.add(book);
+
+        }
     }
-
 }

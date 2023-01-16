@@ -6,12 +6,13 @@ import java.util.ArrayList;
 public class DBConn {
 
     Connection con;
-
+    Statement stm;
     PreparedStatement pst;
     public DBConn() {
         this.con = null;
-        PreparedStatement pst;
+        this.stm = null;
     }
+
 
     public void openDB() {
         /*
@@ -87,6 +88,165 @@ public class DBConn {
             System.out.println("Book Deleted");
         }catch (Exception E){
             System.out.println(E);
+        }
+    }
+
+    /**
+     * Create new DB Table:
+     * 1.Bookshelfs that contains all library
+     * 2.Shlefs that contains all shelfs. Every shelf is binded to a single Bookshelfs
+     * 3.Books that contanins all books. Every book is binded to a single shelf
+     */
+    public void intializeAll() {
+        String sqlTable;
+        try {
+            this.stm = con.createStatement();
+            sqlTable = "CREATE TABLE BOOKSHELFS(" +
+                    "bookshelfsID INT NOT NULL PRIMARY KEY," +
+                    "widht DOUBLE," +
+                    "height DOUBLE," +
+                    "location VARCHAR(25)," +
+                    "numshelf INT)";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Create 'Bookshelfs Table' successfully");
+
+            sqlTable = "CREATE TABLE SHELFS(" +
+                    "shelfsID INT NOT NULL PRIMARY KEY," +
+                    "widht DOUBLE)";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Create 'Shelfs Table' successfully");
+
+            sqlTable = "CREATE TABLE BOOKS(" +
+                    "isbn INT," +
+                    "title VARCHAR(30) NOT NULL PRIMARY KEY," +
+                    "author VARCHAR(25)," +
+                    "type VARCHAR(25)," +
+                    "printDate DATE," +
+                    "insertDate DATE," +
+                    "price DOUBLE)";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Create 'Books Table' successfully");
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Drop all DB's Tables
+     */
+    public void dropAll() {
+        String sqlTable;
+        try {
+            this.stm = this.con.createStatement();
+            sqlTable = "DROP TABLE BOOKS";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Dropped table Books");
+
+            sqlTable = "DROP TABLE SHELFS";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Dropped table Shelfs");
+
+            sqlTable = "DROP TABLE BOOKSHELFS";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Dropped table Bookshelfs");
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Drop Bookshelfs Table
+     */
+    public void dropBookshelfs() {
+        try {
+            String sqlTable = "DROP TABLE BOOKSHELFS";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Dropped table Bookshelfs");
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Drop Shelfs Table
+     */
+    public void dropShelfs() {
+        try {
+            String sqlTable = "DROP TABLE SHELFS";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Dropped table Shelfs");
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Drop Books Table
+     */
+    public void dropBooks() {
+        try {
+            String sqlTable = "DROP TABLE BOOKS";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Dropped table Books");
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Initialize Books Table
+     */
+    public void initializeBooks() {
+            try{
+                this.stm = this.con.createStatement();
+                String sqlTable = "CREATE TABLE BOOKS(" +
+                        "isbn INT," +
+                        "title VARCHAR(30) NOT NULL PRIMARY KEY," +
+                        "author VARCHAR(25)," +
+                        "type VARCHAR(25)," +
+                        "printDate DATE," +
+                        "insertDate DATE," +
+                        "price DOUBLE)";
+                this.stm.executeUpdate(sqlTable);
+                System.out.println("Create 'Books Table' successfully");
+            }catch (Exception e){
+                System.out.println(e);
+            }
+        }
+
+    /**
+     * Initialize Shelfs Table
+     */
+    public void initializeShelfs() {
+        try {
+            this.stm = this.con.createStatement();
+            String sqlTable = "CREATE TABLE SHELFS(" +
+                    "shelfsID INT NOT NULL PRIMARY KEY," +
+                    "widht DOUBLE)";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Create 'Shelfs Table' successfully");
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Initialize Bookshelfs Table
+     */
+    public void initializeBookshelfs() {
+        try {
+            this.stm = con.createStatement();
+            String sqlTable = "CREATE TABLE BOOKSHELFS(" +
+                    "bookshelfsID INT NOT NULL PRIMARY KEY," +
+                    "widht DOUBLE," +
+                    "height DOUBLE," +
+                    "location VARCHAR(25)," +
+                    "numshelf INT)";
+            this.stm.executeUpdate(sqlTable);
+            System.out.println("Create 'Bookshelfs Table' successfully");
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
 }

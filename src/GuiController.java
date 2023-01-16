@@ -3,19 +3,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.Stack;
 
 public class GuiController {
-
     @FXML
     private TextField ISBN;
     @FXML
@@ -50,6 +46,85 @@ public class GuiController {
                 + ZonedDateTime.now().getHour() + ":"
                 + ZonedDateTime.now().getMinute());
         this.listBookButton();
+    }
+
+    /**
+     * open new windows that permit to add new bokkshelf with parameters
+     *
+     * @throws IOException
+     */
+    @FXML
+    private void createNewBookshelf() throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("newBookshelf.fxml"));
+        Scene scene = new Scene(root);
+        stage.setTitle("Nuova Libreria");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * initialize all DB's table
+     */
+    @FXML
+    private void initializeAll(){
+        this.db.intializeAll();
+    }
+
+    /**
+     * initialize DB's Books Table
+     */
+    @FXML
+    private void initializeBooks(){
+        this.db.initializeBooks();
+    }
+
+    /**
+     * initialize DB's Shelfs Table
+     */
+    @FXML
+    private void initializeShelfs(){
+        this.db.initializeShelfs();
+    }
+
+    /**
+     * initialize DB's Bookshelfs Table
+     */
+    @FXML
+    private void initializeBookshelfs(){
+        this.db.initializeBookshelfs();
+    }
+
+    /**
+     * drop all DB's Table
+     */
+    @FXML
+    private void dropAll(){
+        this.db.dropAll();
+    }
+
+    /**
+     * drop DB's Books Table
+     */
+    @FXML
+    private void dropBooks(){
+        this.db.dropBooks();
+    }
+
+    /**
+     * drop DB's Shelfs Table
+     */
+    @FXML
+    private void dropShelfs(){
+        this.db.dropShelfs();
+    }
+
+    /**
+     * drop DB's Bookshelfs Table
+     */
+    @FXML
+    private void dropBookshelfs(){
+        this.db.dropBookshelfs();
     }
 
     /*
